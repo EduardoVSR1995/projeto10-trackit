@@ -9,10 +9,10 @@ export default function Enter(){
         <Container>
             <img src={logo}/> 
             <form>   
-            <input type={"text"} placeholder={"email"} onChange={()=> ""} /> 
+            <input type={"email"} placeholder={"email"} onChange={()=> ""} /> 
             <input name={"password"} placeholder={"senha"} onChange={()=> "" }  />
              <button type="submit">Entrar</button>
-            <Link to={"/"}> Não tem uma conta? Cadastre-se! </Link>
+            <Link to={"/cadastro"}> Não tem uma conta? Cadastre-se! </Link>
              </form>
         </Container> 
     )
@@ -26,6 +26,11 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    input:focus, select:focus {
+    border: 1 none;
+    outline: 0;
+    } 
+    
     a{
         
         font-style: normal;
@@ -46,7 +51,6 @@ const Container = styled.div`
     
     }
     input::placeholder{
-        cursor: pointer;
         font-family: 'Lexend Deca';
         font-style: normal;
         font-weight: 400;
@@ -56,6 +60,7 @@ const Container = styled.div`
 
     }
     input{
+        cursor: pointer;
         padding: 10px;
         width: 100%;
         background: #FFFFFF;

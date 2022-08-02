@@ -1,6 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import styled from 'styled-components';
 import ResetStyled from '../reset/reset';
+import CreatCont from './CreatCont';
 import Enter from './Enter';
 
 export default function App(){
@@ -11,6 +12,7 @@ export default function App(){
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Enter/>}/>
+                    <Route path="/cadastro" element={<CreatCont/>}/>
                     
                 </Routes>
             
