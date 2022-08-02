@@ -1,13 +1,24 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import styled from 'styled-components';
+import ResetStyled from '../reset/reset';
 import Enter from './Enter';
 
-
 export default function App(){
-    <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<Enter/>}/>
+    return(
+    <>
+        <ResetStyled />
+        <Wrapper>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Enter/>}/>
+                    
+                </Routes>
             
-        </Routes>
-    
-    </BrowserRouter>
+            </BrowserRouter>
+        </Wrapper>
+    </>
+    );
 }
+const Wrapper = styled.div`
+ height: 100vh;
+`
