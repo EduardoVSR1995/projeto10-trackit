@@ -2,8 +2,8 @@ import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logo from './image/logo.png'
-import { postLogin } from "./trackit";
-import Button from "./parts/Button";
+import { postLogin } from "./parts/trackit";
+import {Button , Input} from "./parts/Subparts";
 
 export default function Enter(){
     const [loginDate , setLogindate] = useState({});
@@ -11,7 +11,11 @@ export default function Enter(){
     const navigat = useNavigate()
     function login(event){
         event.preventDefault();
-        const promise = postLogin(loginDate,"login");
+        const obj= {
+            email: loginDate.email,
+            password: loginDate.password
+        } 
+        const promise = postLogin(obj);
         promise.catch(err);
         promise.then(sucess);
         
@@ -32,7 +36,7 @@ export default function Enter(){
             <form onSubmit={login} disabled={lo} >   
                 <Input type={"email"} background={lo} placeholder={"email"} onChange={e => setLogindate({...loginDate, email: e.target.value })} required readOnly={lo}/> 
                 <Input type={"password"} background={lo} placeholder={"senha"} onChange={e => setLogindate({...loginDate, password: e.target.value }) }  required readOnly={lo}/>
-                <Button type={"submit"} width={"100%"} bolean={lo} heigt={"45px"} onClick={()=>{!lo ? setLo(!lo): setLo(lo)}} > { !lo ? "Entrar" : "loading..." } </Button>
+                <Button type={"submit"} width={"100%"} bolean={lo} heigt={"45px"} onClick={()=>{!lo ? setLo(!lo): setLo(lo)}} scrib={"Entrar"} > </Button>
                 <Link to={"/cadastro"}> Não tem uma conta? Cadastre-se! </Link>
              </form>
         </Container> 
@@ -69,34 +73,3 @@ const Container = styled.div`
     }
     `;
 
-const Input  = styled.input`
-        cursor: pointer;
-        -webkit-box-shadow:0 0 0 50px white inset ;
-        padding: 10px;
-        width: 100%;
-        border: 1px solid #D5D5D5;
-        border-radius: 5px;
-        height: 45px;
-        margin-bottom: 5px;
-        background: ${(props) => !props.background ? "#FFFFFF" : "#F2F2F2" };
-        color:${(props) => !props.background ? "#666666" : "#D4D4D4" };
-        opacity: ${(props) => !props.background ? 1 : 0.4 } ;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 21px;
-        line-height: 25px;
-
-        ::placeholder{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 21px;
-        line-height: 25px;
-        color: #DBDBDB ;
-        }
-        :focus, select:focus {
-        border: 1 none;
-        outline: 0;
-        }    
-    
-
-`;

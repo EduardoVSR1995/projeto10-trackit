@@ -2,8 +2,9 @@ import logo from './image/logo.png'
 import { useState} from 'react';
 import { Link, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
-import {postLogin } from './trackit';
-import Button from './parts/Button';
+import {postCreat } from './parts/trackit';
+import {Button, Input} from './parts/Subparts';
+
 
 
 export default function CreatCont(){
@@ -11,8 +12,14 @@ export default function CreatCont(){
     const [lo , setLo] = useState(false);
     const navigate = useNavigate()
     function submitobj(event){ 
+        const obj={
+            email:personalDate.email,
+            name:personalDate.name,
+            image:personalDate.image,
+            password:personalDate.password
+        }
         event.preventDefault();
-            const promise = postLogin(personalDate, "sign-up" );
+            const promise = postCreat(obj);
             promise.catch(err);
             promise.then(sucess);
         }
@@ -32,7 +39,7 @@ export default function CreatCont(){
                 <Input type={"password"} background={lo} placeholder={"senha"} onChange={e => setPersonalDate({...personalDate, password: e.target.value})}  required  readOnly={lo}/>
                 <Input type={"text"} background={lo} placeholder={"nome"} onChange={e => setPersonalDate({...personalDate, name: e.target.value})} required readOnly={lo}  />
                 <Input type={"url"} background={lo} placeholder={"foto"} accept={"url"} onChange={e => setPersonalDate({...personalDate, image: e.target.value})} required  readOnly={lo}/>        
-                <Button type={"submit"} width={"100%"} bolean={lo} heigt={"45px"} onClick={()=>{!lo ? setLo(!lo): setLo(lo)}} > { !lo ? "Entrar" : "loading..." } </Button>
+                <Button type={"submit"} width={"100%"} bolean={lo} heigt={"45px"} onClick={()=>{!lo ? setLo(!lo): setLo(lo)}} scrib={"Entrar"}> </Button>
             </form>
          <Link to={"/"}> Já tem uma conta? Faça login!</Link>
     </Container> 
@@ -67,37 +74,3 @@ const Container = styled.div`
     
     }
     `;
-
-const Input  = styled.input`
-        cursor: pointer;
-        -webkit-box-shadow:0 0 0 50px white inset ;
-        padding: 10px;
-        width: 100%;
-        border: 1px solid #D5D5D5;
-        border-radius: 5px;
-        height: 45px;
-        margin-bottom: 5px;
-        background: ${(props) => !props.background ? "#FFFFFF" : "#F2F2F2" };
-        color:${(props) => !props.background ? "#666666" : "#D4D4D4" };
-        opacity: ${(props) => !props.background ? 1 : 0.4 } ;
-        font-family: 'Lexend Deca';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 21px;
-        line-height: 25px;
-
-        ::placeholder{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 21px;
-        line-height: 25px;
-        color: #DBDBDB ;
-    }
-
-    :focus, select:focus {
-    border: 1 none;
-    outline: 0;
-    } 
-    
-
-`;
