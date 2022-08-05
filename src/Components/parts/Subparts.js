@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import  {  CircularProgressbar , buildStyles }  from  'react-circular-progressbar' ; 
+import  'react-circular-progressbar/dist/styles.css' ;
+
 
 function Container(props){
     return(
@@ -31,7 +34,7 @@ const Butto = styled.button`
         border-radius: 5px;
         font-style: normal;
         font-weight: 400;
-        font-size: 20.976px;
+        font-size: 21px;
         line-height: 26px;
         color: #FFFFFF;
         opacity: ${(props) => !props.bolean ? 1 : 0.5 };
@@ -119,9 +122,37 @@ const Foto = styled.img`
     border-radius: 50%;
     width: 51px;
     max-height: 51px;
-
     `;
 
+function Basebar({percent}) {
+    return (
+        <Base> Hábitos
+            <Circule>
+                <CircularProgressbar value={percent} maxValue={1} text={"hoje"} background backgroundPadding={6} styles={buildStyles({ backgroundColor: "#3e98c7", textSize: "20px", textColor: "#FFFFFF", pathColor: "#FFFFFF", trailColor: "transparent", textFamily: "Lexend Deca" })} />
+            </Circule>
+            Histórico
+        </Base>
+    )
+}
+const Base=styled.div`
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+
+`;
+const Circule = styled.div`
+width: 91px;
+height: 91px;
+margin-bottom: 50px;
+
+`;
 
 
 
@@ -129,4 +160,4 @@ const days = ['D','S','T','Q','Q','S','S'];
 
 
 
-export { Container, Button ,Text , days , Input, Topo}
+export { Container, Button ,Text , days , Input, Topo , Basebar}

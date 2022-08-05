@@ -7,27 +7,28 @@ import CreatCont from './CreatCont';
 import Enter from './Enter';
 import Habits from './Habits';
 import UserContext from './parts/UserContext';
-import {Topo} from './parts/Subparts'
+import { Basebar, Topo } from './parts/Subparts'
 
 export default function App() {
     const [user, setUser] = useState([]);
-    console.log(user);
     return (
         <>
-            <ResetStyled />
-            <Wrapper>
-                <UserContext.Provider value={{user , setUser}}>
-                      {user.length === 0 ? "" : <Topo logo={logo} image={user.objUser.image}> </Topo>}
+            <UserContext.Provider value={{ user, setUser }}>
+                <ResetStyled />
+                <Wrapper>
                     <BrowserRouter>
+                        {user.id === undefined ? "" : <Topo logo={logo} image={user.image}> </Topo>}
                         <Routes>
-                                <Route path="/" element={<Enter />} />
-                                <Route path="/cadastro" element={<CreatCont />} />
-                                <Route path='/habitos' element={<Habits />} />
-                            
+                            <Route path="/" element={<Enter />} />
+                            <Route path="/cadastro" element={<CreatCont />} />
+                            <Route path='/habitos' element={<Habits />} />
+
                         </Routes>
+                        {user.id === undefined ? "" : <Basebar percent={0.5}></Basebar>}
                     </BrowserRouter>
-                </UserContext.Provider>
-            </Wrapper>
+
+                </Wrapper>
+            </UserContext.Provider>
         </>
     );
 }

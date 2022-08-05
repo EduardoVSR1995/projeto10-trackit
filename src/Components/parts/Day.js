@@ -2,18 +2,26 @@ import styled from "styled-components";
 import { useState} from 'react';
 
 
-export default function Day({value , setPersonalDate, personalDate, number, modal, daySelect}){
-    const [personal ,setPersonal] = useState(true);
+export default function Day({value , setPersonalDate, personalDate, boton, number, modal, daySelect}){
+    const [personal ,setPersonal] = useState({perso:true});
     number===0 ? number=7 : number=number
+    function state(){
+        console.log(boton)
+        if(boton === undefined){
+            personal.perso ? add() : del()
+        }
+    }
+
     function add(){
         const t = personalDate.days.length !== 0 ?  personalDate.days.map((e)=>e) : [];
         t.push(number);
-        setPersonalDate({...personalDate, days: t})
-        setPersonal(!personal);
+        setPersonalDate({...personalDate, days: t});
+        setPersonal({...personal, perso: !personal.perso});
+
     }
     function del(){
         setPersonalDate({...personalDate, days: personalDate.days.filter((e)=>  e !== number) });
-        setPersonal(!personal);
+        setPersonal({...personal, perso: !personal.perso});
     }
     if(modal !== undefined){
         const day = daySelect.filter((value)=> value === number);
@@ -24,8 +32,9 @@ export default function Day({value , setPersonalDate, personalDate, number, moda
     }
     else{
         return(
-            <Unit bolean={personalDate.bolean2}  personal={personal} onClick={()=> personal ? add() : del() } >{value}</Unit>
+            <Unit bolean={personalDate.bolean2}  personal={personal.perso}   onClick={state} >{value}</Unit>
         )
+    
     }
 
 }
@@ -45,7 +54,5 @@ const Unit = styled.h2`
     font-size: 20px;
     line-height: 25px;
     color: ${props=> props.personal ? "#DBDBDB" : "#FFFFFF"} ;
-    opacity: ${props=> props.bolean ? 1 : 0.4} ;;
-
-
+    opacity: ${props=> props.bolean ? 1 : 0.4} ;
 `;

@@ -2,23 +2,41 @@ import styled from "styled-components"
 import { Container, Text ,days } from "./Subparts"
 import scrap from '../image/lixeira.png'
 import Day from "./Day";
+import { delHabts } from "./trackit";
+import UserContext from './UserContext';
+import { useContext } from "react";
 
 export default function Everyhabt({obj}){
+    const {user ,setUser} = useContext(UserContext);
+    function del(){
+        const promis = delHabts(obj.id , {headers: {Authorization: `Bearer ${user.token}`}} )
+        promis.then(sucess);
+        promis.catch(err);
+    }
+    function sucess(){
+        setUser({...user, reload:true})
+        
+    }
+    function err(value){
+        console.log(value)
+
+    }
+
     return(
         <Container size={"min"} >
-           <Text>{obj.name} </Text><Img src={scrap}/>
+           <Text>{obj.name} </Text><Img onClick={del} src={scrap}/>
            <Days>{days.map((value,index)=> <Day key={index} value={value} modal={true} number={index} daySelect={obj.days}> </Day>)}</Days>
-            </Container>
+        </Container>
     )
 }
 const Img = styled.img`
     position: relative;
     bottom: 20px;
     left: 315px;
+    z-index: 0;
 `;
 
 const Days = styled.div`
-    position: relative;
     bottom: 10px;
     width: 320px;
     display: flex;

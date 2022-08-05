@@ -1,11 +1,13 @@
 import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import logo from './image/logo.png'
 import { postLogin } from "./parts/trackit";
 import {Button , Input} from "./parts/Subparts";
+import UserContext from './parts/UserContext';
 
 export default function Enter(){
+    const {user ,setUser} = useContext(UserContext);
     const [loginDate , setLogindate] = useState({});
     const [lo , setLo] = useState(false);
     const navigat = useNavigate()
@@ -22,8 +24,9 @@ export default function Enter(){
     }
     function sucess(value){
         const obj= value.data;
-        console.log(value);
-        return  navigat("/habitos", {state:{obj}});
+        setUser(obj)
+        console.log(user)
+        return  navigat("/habitos");
     }
     function err(value){
         console.log(value)
