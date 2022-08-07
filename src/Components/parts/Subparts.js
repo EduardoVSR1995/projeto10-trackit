@@ -49,11 +49,11 @@ function Text(props){
 }
 const Tex = styled.div`
     display: flex;
-    width: 80%;
+    width: 100%;
     height: 20px;
     font-style: normal;
     font-weight: 400;
-    font-size: ${props=> props.font !== undefined ? "13px" : "20px" };
+    font-size: ${props=> props.font !== undefined ? "13px" : "18px" };
     line-height: 25px;
     color: #666666;
 `;

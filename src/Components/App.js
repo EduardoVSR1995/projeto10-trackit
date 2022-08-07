@@ -9,6 +9,7 @@ import Habits from './Habits';
 import UserContext from './parts/UserContext';
 import { Basebar, Topo } from './parts/Subparts'
 import Today from './Today'
+import Histori from './Histori';
 
 export default function App() {
     const [user, setUser] = useState([]); 
@@ -26,6 +27,8 @@ export default function App() {
                             <Route path="/cadastro" element={<CreatCont />} />
                             <Route path='/habitos' element={<Habits />} />
                             <Route path='/hoje' element={<Today />} />
+                            <Route path='/historico' element={<Histori />} />
+
                         </Routes>
                         {user.id === undefined ? "" : <Basebar percent={ user.percent !== undefined ? 1-user.percent : 0 }></Basebar>}
                     </BrowserRouter>

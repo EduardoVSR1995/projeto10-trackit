@@ -39,7 +39,6 @@ export default function CreatHabits({ setAdd, add }) {
             promis.then(sucess);
         }
     }
-    console.log(user,personalDate);
     function err(value) {
         alert(value);
         setPersonalDate({ ...personalDate, bolean2: personalDate.bolean2, boton:true })
@@ -49,7 +48,6 @@ export default function CreatHabits({ setAdd, add }) {
         setAdd({ ...add, bolean: !add.bolean });
         setUser({ ...user, objLocal: value, reload: true , activUser:undefined })
         user.reload2();
-        console.log(user);
     }
     return (
         <Container size={'mediun'} >

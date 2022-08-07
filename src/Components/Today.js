@@ -28,7 +28,7 @@ export default function Today(){
     return(
         <AllContainer>
             <p>{week[o.$W]} , {o.format('DD/MM')}</p>
-            { today.percent === undefined ||   0.08 > today.percent   ? <Span bolean={true}> Nenhum hábito concluído ainda</Span> : <Span>{(user.percent*100).toFixed(0)}% hábitos concluídos</Span>}
+            { user.percent === undefined ||   0.08 > user.percent   ? <Span bolean={true}> Nenhum hábito concluído ainda</Span> : <Span>{(user.percent*100).toFixed(0)}% hábitos concluídos</Span>}
             <AllHabtis>
                 {today.i.length !== 0  ? today.i.map((value, index) => <CheckHabti key={index} value={value} index={index} today={today} setToday={setToday}/>) : ""}  
             </AllHabtis>

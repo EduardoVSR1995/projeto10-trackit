@@ -7,14 +7,14 @@ export default function Day({value , setPersonalDate, personalDate,boton, number
     useEffect(()=>{
         if (list !== undefined) {
             const i = list.filter((value)=> number===value );
-            i.length !== 0 ? setPersonal({...personal, perso: !personal.perso}) : setPersonal({...personal, perso: personal.perso})
+            i.length !== 0 ? setPersonal({...personal, perso: !personal.perso}) : setPersonal({...personal, perso: personal.perso});
         }
         
     },[]);
     
     function state(){
         if(boton){
-            personal.perso ? add() : del()
+            personal.perso ? add() : del();
         }
     }
 

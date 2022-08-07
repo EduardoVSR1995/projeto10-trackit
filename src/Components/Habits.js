@@ -44,7 +44,6 @@ export default function Habits() {
     function err(value) {
         alert(value);
     }
-    console.log(user);
 
 
     return (

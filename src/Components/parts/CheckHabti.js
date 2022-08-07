@@ -10,7 +10,6 @@ import UserContext from "./UserContext";
 export default function CheckHabti({value, today, setToday}){
     const {user ,setUser} = useContext(UserContext);
     const [state, setstate] = useState({});
-    console.log(value,state)
     useEffect(()=>{
         setstate(value);
         },[])
