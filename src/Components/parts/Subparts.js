@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import  {  CircularProgressbar , buildStyles }  from  'react-circular-progressbar' ; 
 import  'react-circular-progressbar/dist/styles.css' ;
+import { Link } from "react-router-dom";
 
 
 function Container(props){
     return(
-        <Contai size={props.size} > {props.children}</Contai>
+        <Contai size={props.size} font={props.font} > {props.children}</Contai>
     )   
 }
 const Contai = styled.div`
@@ -43,7 +44,7 @@ const Butto = styled.button`
 
 function Text(props){
     return(
-        <Tex>{props.children}</Tex>
+        <Tex font={props.font} >{props.children}</Tex>
     )
 }
 const Tex = styled.div`
@@ -52,7 +53,7 @@ const Tex = styled.div`
     height: 20px;
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: ${props=> props.font !== undefined ? "13px" : "20px" };
     line-height: 25px;
     color: #666666;
 `;
@@ -101,7 +102,7 @@ return(
 )
 }
 const Top = styled.div`
-
+    z-index: 1;
     position: fixed;
     left: 0px;
     top:0px;
@@ -126,11 +127,13 @@ const Foto = styled.img`
 
 function Basebar({percent}) {
     return (
-        <Base> Hábitos
+        <Base> <Link to={"/habitos"}> Hábitos</Link>
             <Circule>
-                <CircularProgressbar value={percent} maxValue={1} text={"hoje"} background backgroundPadding={6} styles={buildStyles({ backgroundColor: "#3e98c7", textSize: "20px", textColor: "#FFFFFF", pathColor: "#FFFFFF", trailColor: "transparent", textFamily: "Lexend Deca" })} />
+                <Link to={"/hoje"}>
+                    <CircularProgressbar value={percent} maxValue={1} text={"hoje"} background backgroundPadding={6} styles={buildStyles({ backgroundColor: "#3e98c7", textSize: "20px", textColor: "#FFFFFF", pathColor: "#FFFFFF", trailColor: "transparent", textFamily: "Lexend Deca" })} />
+                </Link>
             </Circule>
-            Histórico
+            <Link to={"/historico"}> Histórico</Link>
         </Base>
     )
 }
@@ -144,7 +147,10 @@ const Base=styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
-
+    a{
+        text-decoration: none;
+        color:#52B6FF ;
+    }
 
 `;
 const Circule = styled.div`
@@ -155,9 +161,8 @@ margin-bottom: 50px;
 `;
 
 
-
 const days = ['D','S','T','Q','Q','S','S'];
+const week = ["Domingo" ,"Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"]
 
 
-
-export { Container, Button ,Text , days , Input, Topo , Basebar}
+export {Container, Button ,Text , days , week, Input, Topo , Basebar}

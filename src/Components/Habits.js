@@ -3,38 +3,50 @@ import styled from "styled-components";
 import { Button } from "./parts/Subparts";
 import CreatHabits from "./parts/CreatHabits";
 import UserContext from './parts/UserContext';
-import { getHeader } from "./parts/trackit";
+import { getHeader , getToday} from "./parts/trackit";
 import Everyhabt from './parts/Everyhabt';
 
 
 export default function Habits() {
     const { user, setUser } = useContext(UserContext);
     const [add, setAdd] = useState({ bolean: true });
-    const value = 0.50;
-
-    console.log(user)
-
     useEffect(() => {
+        getToday({ headers: { Authorization: `Bearer ${user.token}` } }).catch(err1).then(sucess1);
         const promis = getHeader({ headers: { Authorization: `Bearer ${user.token}` } });
         promis.then(sucess);
         promis.catch(err);
-    }, []);
-
+}, []);
+        
     if (user.reload !== undefined) {
-        console.log(user);
         const promis = getHeader({ headers: { Authorization: `Bearer ${user.token}` } });
+        console.log(user)
         promis.then(sucess);
         promis.catch(err);
         setUser({ ...user, reload: undefined })
     }
+    if(user.reload2 !== undefined){
+        getToday({ headers: { Authorization: `Bearer ${user.token}` } }).catch(err1).then(sucess1)
+        setUser({...user, reload2: undefined})
+    }
+
+    function sucess1(value) {
+        console.log(value);
+        setUser({...user, percent: (value.data.filter((i)=> i.done === true ).length)/value.data.length , total: value.data.length });
+    }
+
+    function err1(value) {
+        console.log(value)
+    }
+
 
     function sucess(value) {
         setAdd({ ...add, objects: value.data });
+    }
 
-    }
     function err(value) {
-        console.log(value);
+        alert(value);
     }
+
     return (
         <>
             <Container>
@@ -50,7 +62,7 @@ export default function Habits() {
 
 const AllHabits = styled.div`
     overflow: auto;
-    max-height: 180vw;
+    max-height: 150vw;
 `;
 
 

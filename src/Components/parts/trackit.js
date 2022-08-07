@@ -27,4 +27,21 @@ function delHabts(id , header){
     return promise;
 }
 
-export { postLogin ,postCreat , postLoginHeader, getHeader, delHabts };
+function getToday(header){
+    const promise = axios.get(`${URL}habits/today`, header);
+    return promise;    
+}
+
+function postCheck( id,header){
+    const promis = axios.post( `${URL}habits/${id}/check`, {} , header );
+    return promis;
+}
+
+function postUncheck(id,header){
+    const promis = axios.post( `${URL}habits/${id}/uncheck`, {} , header );
+    return promis;
+
+}
+
+
+export { postUncheck ,postCheck, postLogin ,postCreat , postLoginHeader, getHeader, delHabts, getToday };

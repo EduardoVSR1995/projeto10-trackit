@@ -1,13 +1,19 @@
 import styled from "styled-components";
-import { useState} from 'react';
+import { useState, useEffect} from 'react';
 
 
-export default function Day({value , setPersonalDate, personalDate, boton, number, modal, daySelect}){
+export default function Day({value , setPersonalDate, personalDate,boton, number, modal, daySelect, list}){
     const [personal ,setPersonal] = useState({perso:true});
-    number===0 ? number=7 : number=number
+    useEffect(()=>{
+        if (list !== undefined) {
+            const i = list.filter((value)=> number===value );
+            i.length !== 0 ? setPersonal({...personal, perso: !personal.perso}) : setPersonal({...personal, perso: personal.perso})
+        }
+        
+    },[]);
+    
     function state(){
-        console.log(boton)
-        if(boton === undefined){
+        if(boton){
             personal.perso ? add() : del()
         }
     }
@@ -17,7 +23,6 @@ export default function Day({value , setPersonalDate, personalDate, boton, numbe
         t.push(number);
         setPersonalDate({...personalDate, days: t});
         setPersonal({...personal, perso: !personal.perso});
-
     }
     function del(){
         setPersonalDate({...personalDate, days: personalDate.days.filter((e)=>  e !== number) });

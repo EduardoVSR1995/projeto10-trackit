@@ -9,12 +9,15 @@ import { useContext } from "react";
 export default function Everyhabt({obj}){
     const {user ,setUser} = useContext(UserContext);
     function del(){
+        const boole =  window.confirm("desejaexcluir o habito")
+        if(boole){
         const promis = delHabts(obj.id , {headers: {Authorization: `Bearer ${user.token}`}} )
         promis.then(sucess);
         promis.catch(err);
     }
+    }
     function sucess(){
-        setUser({...user, reload:true})
+        setUser({...user, reload:true ,reload2:true})
         
     }
     function err(value){
@@ -32,7 +35,7 @@ export default function Everyhabt({obj}){
 const Img = styled.img`
     position: relative;
     bottom: 20px;
-    left: 315px;
+    left: 300px;
     z-index: 0;
 `;
 

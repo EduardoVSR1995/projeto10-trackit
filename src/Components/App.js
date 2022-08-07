@@ -8,9 +8,12 @@ import Enter from './Enter';
 import Habits from './Habits';
 import UserContext from './parts/UserContext';
 import { Basebar, Topo } from './parts/Subparts'
+import Today from './Today'
 
 export default function App() {
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState([]); 
+    
+
     return (
         <>
             <UserContext.Provider value={{ user, setUser }}>
@@ -22,11 +25,10 @@ export default function App() {
                             <Route path="/" element={<Enter />} />
                             <Route path="/cadastro" element={<CreatCont />} />
                             <Route path='/habitos' element={<Habits />} />
-
+                            <Route path='/hoje' element={<Today />} />
                         </Routes>
-                        {user.id === undefined ? "" : <Basebar percent={0.5}></Basebar>}
+                        {user.id === undefined ? "" : <Basebar percent={ user.percent !== undefined ? 1-user.percent : 0 }></Basebar>}
                     </BrowserRouter>
-
                 </Wrapper>
             </UserContext.Provider>
         </>
