@@ -19,23 +19,21 @@ export default function Habits() {
         
     if (user.reload !== undefined) {
         const promis = getHeader({ headers: { Authorization: `Bearer ${user.token}` } });
-        console.log(user)
         promis.then(sucess);
         promis.catch(err);
         setUser({ ...user, reload: undefined })
     }
-    if(user.reload2 !== undefined){
-        getToday({ headers: { Authorization: `Bearer ${user.token}` } }).catch(err1).then(sucess1)
-        setUser({...user, reload2: undefined})
+    function reload2(){
+            getToday({ headers: { Authorization: `Bearer ${user.token}` } }).catch(err1).then(sucess1)
+  
     }
 
     function sucess1(value) {
-        console.log(value);
-        setUser({...user, percent: (value.data.filter((i)=> i.done === true ).length)/value.data.length , total: value.data.length });
+        setUser({...user, percent: (value.data.filter((i)=> i.done === true ).length)/value.data.length , total: value.data.length , reload2 });
     }
 
     function err1(value) {
-        console.log(value)
+        alert(value)
     }
 
 
@@ -46,6 +44,8 @@ export default function Habits() {
     function err(value) {
         alert(value);
     }
+    console.log(user);
+
 
     return (
         <>

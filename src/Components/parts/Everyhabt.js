@@ -17,8 +17,8 @@ export default function Everyhabt({obj}){
     }
     }
     function sucess(){
-        setUser({...user, reload:true ,reload2:true})
-        
+        setUser({...user, reload:true })
+        user.reload2();        
     }
     function err(value){
         console.log(value)

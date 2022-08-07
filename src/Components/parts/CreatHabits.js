@@ -23,6 +23,7 @@ export default function CreatHabits({ setAdd, add }) {
             alert("Escolha pelo menos um dia da semana ou coloque um habito");
         }
         else {
+                   
             setPersonalDate({ ...personalDate, bolean2: !personalDate.bolean2, boton: false });
             const head = {
                 headers: {
@@ -47,6 +48,8 @@ export default function CreatHabits({ setAdd, add }) {
         alert("Parabéns vocẽ criou um novo abito :)");
         setAdd({ ...add, bolean: !add.bolean });
         setUser({ ...user, objLocal: value, reload: true , activUser:undefined })
+        user.reload2();
+        console.log(user);
     }
     return (
         <Container size={'mediun'} >

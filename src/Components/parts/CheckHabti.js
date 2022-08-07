@@ -7,31 +7,31 @@ import { useState, useEffect, useContext } from "react";
 import { postCheck, postUncheck } from "./trackit";
 import UserContext from "./UserContext";
 
-export default function CheckHabti({value}){
+export default function CheckHabti({value, today, setToday}){
     const {user ,setUser} = useContext(UserContext);
     const [state, setstate] = useState({});
+    console.log(value,state)
     useEffect(()=>{
         setstate(value);
-        },[]
-    )
+        },[])
+       
     function togle(){
         if(!state.done){
             setUser({...user, percent: (user.percent + 1/user.total) });
             setstate({...state, done: !state.done , currentSequence: state.currentSequence+1 , highestSequence:state.highestSequence+1 });
             postCheck( state.id ,{ headers: { Authorization: `Bearer ${user.token}` } }).catch(err).then(sucess)
-            console.log(state.done)
-            
+            setToday({...today, percent: (user.percent + 1/user.total) });
         }
         else{
             setUser({...user, percent: (user.percent - 1/user.total)});
             setstate({...state, done: !state.done , currentSequence: state.currentSequence-1 , highestSequence:state.highestSequence-1 });
             postUncheck( state.id ,{ headers: { Authorization: `Bearer ${user.token}` } }).catch(err).then(sucess)   
+            setToday({...today, percent: (user.percent - 1/user.total) });
         }
 
     }
     function sucess(value){
-        const i = value.data;
-        setUser({...user, percent: user.percent });
+        const i = value.data;  
     }
 
     function err(value){
