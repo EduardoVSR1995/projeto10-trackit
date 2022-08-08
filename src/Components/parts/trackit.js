@@ -40,8 +40,13 @@ function postCheck( id,header){
 function postUncheck(id,header){
     const promis = axios.post( `${URL}habits/${id}/uncheck`, {} , header );
     return promis;
-
 }
 
+function getHistori(header){
+    const promis = axios.get( `${URL}habits/history/daily`, header );
+    return promis;
+}    
 
-export { postUncheck ,postCheck, postLogin ,postCreat , postLoginHeader, getHeader, delHabts, getToday };
+
+
+export { getHistori , postUncheck ,postCheck, postLogin ,postCreat , postLoginHeader, getHeader, delHabts, getToday };

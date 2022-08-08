@@ -2,6 +2,7 @@ import styled from "styled-components";
 import  {  CircularProgressbar , buildStyles }  from  'react-circular-progressbar' ; 
 import  'react-circular-progressbar/dist/styles.css' ;
 import { Link } from "react-router-dom";
+import { ThreeDots } from 'react-loader-spinner';
 
 
 function Container(props){
@@ -21,12 +22,16 @@ const Contai = styled.div`
 
 
 function Button({ width, heigt,scrib , bolean, ...func}){
+    console.log(width,);
     return(
-        <Butto width={width} bolean={bolean} heigt={heigt} {...func} >{!bolean ? scrib : "lading..."}</Butto>
+        <Butto width={width} bolean={bolean} heigt={heigt} {...func} >{!bolean ? scrib : <ThreeDots color="#FFFFFF" height={12}  width={43}/>}</Butto>
     )
 
 }
 const Butto = styled.button`
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer; 
         border-style: none;
         width: ${props=> props.width};
@@ -66,16 +71,15 @@ function Input({...others}){
 }
 const Inp = styled.input`
         cursor: pointer;
-        -webkit-box-shadow:0 0 0 50px white inset ;
+        -webkit-box-shadow: ${(props) => !props.background ? "0 0 0 50px white inset" : "0 0 0 50px #F2F2F2 inset" }  ;
         padding: 10px;
         width: 100%;
         border: 1px solid #D5D5D5;
         border-radius: 5px;
         height: 45px;
         margin-bottom: 5px;
-        background: ${(props) => !props.background ? "#FFFFFF" : "#F2F2F2" };
         color:${(props) => !props.background ? "#666666" : "#D4D4D4" };
-        opacity: ${(props) => !props.background ? 1 : 0.4 } ;
+        opacity: ${(props) => !props.background ? 1 : 0.6 } ;
         font-style: normal;
         font-weight: 400;
         font-size: 21px;

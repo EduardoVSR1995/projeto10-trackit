@@ -25,12 +25,13 @@ export default function Today(){
     function err(value){
         return alert(value);
     }
+    console.log(user.percent === undefined , 0.08 > user.percent    )
     return(
         <AllContainer>
             <p>{week[o.$W]} , {o.format('DD/MM')}</p>
-            { user.percent === undefined ||   0.08 > user.percent   ? <Span bolean={true}> Nenhum hábito concluído ainda</Span> : <Span>{(user.percent*100).toFixed(0)}% hábitos concluídos</Span>}
+            {  user.percent === undefined ||   0.08 < user.percent   ? <Span>{(user.percent*100).toFixed(0)}% hábitos concluídos</Span> : <Span bolean={true}> Nenhum hábito concluído ainda</Span>}
             <AllHabtis>
-                {today.i.length !== 0  ? today.i.map((value, index) => <CheckHabti key={index} value={value} index={index} today={today} setToday={setToday}/>) : ""}  
+                {today.i.length !== 0   ? today.i.map((value, index) => <CheckHabti key={index} value={value} index={index} today={today} setToday={setToday}/>) : ""}  
             </AllHabtis>
         </AllContainer>
     )

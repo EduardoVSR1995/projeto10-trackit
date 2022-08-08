@@ -1,11 +1,33 @@
-import { Text } from "./parts/Subparts";
+import { Container, Text } from "./parts/Subparts";
 import styled from "styled-components";
+import { getHistori } from "./parts/trackit";
+import UserContext from './parts/UserContext';
+import { useContext, useEffect, useState  } from "react";
 
 export default function Histori(){
+    const {user ,setUser} = useContext(UserContext);
+    const [histori , setHistori] = useState({});
+
+    useEffect(() => {
+        const promis = getHistori({ headers: { Authorization: `Bearer ${user.token}` } });    
+        promis.catch(err);
+        promis.then(sucess);
+    }, []);
+
+    function sucess(value) {
+        console.log(value)
+        setHistori({...histori , allHabit: value.data})
+    }
+
+    function err(value) {
+        alert(value);
+    }
+    console.log(histori.allHabit)
+    
     return(
         <AllContainer>
             <p> Histórico </p>
-             { true ? <Text >Em breve você poderá ver o histórico dos seus hábitos aqui! </Text> : "" }
+            { histori.allHabit !== undefined ? <Text >Em breve você poderá ver o histórico dos seus hábitos aqui! </Text> :   "" }
 
         </AllContainer>
     )
