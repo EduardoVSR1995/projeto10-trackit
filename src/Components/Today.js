@@ -1,15 +1,15 @@
 import dayjs from "dayjs";
 import styled from "styled-components";
-import { week } from "./parts/Subparts";
-import { useState, useContext , useEffect } from "react";
+import { week, Topo, Basebar } from "./parts/Subparts";
+import { useState, useContext, useEffect } from "react";
 import UserContext from './parts/UserContext';
 import { getToday } from "./parts/trackit";
 import CheckHabti from "./parts/CheckHabti";
-  
+import logo from './image/tra.png'
 
-export default function Today(){
-    const {user ,setUser} = useContext(UserContext);
-    const [today , setToday] = useState({i:[]});
+export default function Today() {
+    const { user, setUser } = useContext(UserContext);
+    const [today, setToday] = useState({ i: [] });
     const o = dayjs();
     useEffect(() => {
         const promis = getToday({ headers: { Authorization: `Bearer ${user.token}` } });
@@ -17,22 +17,24 @@ export default function Today(){
         promis.catch(err);
     }, []);
 
-    function sucess(value){
+    function sucess(value) {
         const i = value.data;
-        setToday({...today, i})
+        setToday({ ...today, i })
     }
-     
-    function err(value){
+
+    function err(value) {
         return alert(value);
     }
-    console.log(user.percent === undefined , 0.08 > user.percent    )
-    return(
+    console.log(user.percent === undefined, 0.08 > user.percent)
+    return (
         <AllContainer>
+            <Topo logo={logo} image={user.image}> </Topo>
             <p>{week[o.$W]} , {o.format('DD/MM')}</p>
-            {  user.percent === undefined ||   0.08 < user.percent   ? <Span>{(user.percent*100).toFixed(0)}% hábitos concluídos</Span> : <Span bolean={true}> Nenhum hábito concluído ainda</Span>}
+            {user.percent === undefined || 0.08 < user.percent ? <Span>{(user.percent * 100).toFixed(0)}% hábitos concluídos</Span> : <Span bolean={true}> Nenhum hábito concluído ainda</Span>}
             <AllHabtis>
-                {today.i.length !== 0   ? today.i.map((value, index) => <CheckHabti key={index} value={value} index={index} today={today} setToday={setToday}/>) : ""}  
+                {today.i.length !== 0 ? today.i.map((value, index) => <CheckHabti key={index} value={value} index={index} today={today} setToday={setToday} />) : ""}
             </AllHabtis>
+            <Basebar percent={ user.percent !== undefined ? 1-user.percent : 0 }></Basebar>
         </AllContainer>
     )
 }
@@ -72,5 +74,5 @@ const Span = styled.span`
         font-weight: 400;
         font-size: 17.976px;
         line-height: 22px;
-        color: ${ props=> props.bolean ? '#BABABA' : '#8FC549'};
+        color: ${props => props.bolean ? '#BABABA' : '#8FC549'};
     `;

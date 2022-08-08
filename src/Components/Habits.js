@@ -1,9 +1,10 @@
 import { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
-import { Button } from "./parts/Subparts";
+import logo from './image/tra.png'
+import { Button, Topo ,Basebar } from "./parts/Subparts";
 import CreatHabits from "./parts/CreatHabits";
 import UserContext from './parts/UserContext';
-import { getHeader , getToday} from "./parts/trackit";
+import { getHeader, getToday } from "./parts/trackit";
 import Everyhabt from './parts/Everyhabt';
 
 
@@ -15,25 +16,25 @@ export default function Habits() {
         const promis = getHeader({ headers: { Authorization: `Bearer ${user.token}` } });
         promis.then(sucess);
         promis.catch(err);
-}, []);
-        
+    }, []);
+
     if (user.reload !== undefined) {
         const promis = getHeader({ headers: { Authorization: `Bearer ${user.token}` } });
         promis.then(sucess);
         promis.catch(err);
         setUser({ ...user, reload: undefined })
     }
-    function reload2(){
-            getToday({ headers: { Authorization: `Bearer ${user.token}` } }).catch(err1).then(sucess1)
-  
+    function reload2() {
+        getToday({ headers: { Authorization: `Bearer ${user.token}` } }).catch(err1).then(sucess1);
+
     }
 
     function sucess1(value) {
-        setUser({...user, percent: (value.data.filter((i)=> i.done === true ).length)/value.data.length , total: value.data.length , reload2 });
+        setUser({ ...user, percent: (value.data.filter((i) => i.done === true).length) / value.data.length, total: value.data.length, reload2 });
     }
 
     function err1(value) {
-        alert(value)
+        alert(value);
     }
 
 
@@ -49,11 +50,13 @@ export default function Habits() {
     return (
         <>
             <Container>
+                <Topo logo={logo} image={user.image}> </Topo>
                 <p>Meus hábitos  <Button width={'45px'} heigt={'35px'} onClick={() => add.bolean ? setAdd({ ...add, bolean: !add.bolean }) : setAdd({ ...add, bolean: add.bolean })} scrib={"+"} ></Button></p>
                 {!add.bolean ? <CreatHabits setAdd={setAdd} add={add} /> : ""}
                 <AllHabits>
                     {add.objects === undefined || add.objects.length === 0 ? <h1>Você não tem nenhum hábito <br /> cadastrado ainda. Adicione um hábito<br /> para começar a trackear! </h1> : add.objects.map((value, index) => <Everyhabt key={index} obj={value} />)}
                 </AllHabits>
+                <Basebar percent={ user.percent !== undefined ? 1-user.percent : 0 }></Basebar>
             </Container>
         </>
     )
