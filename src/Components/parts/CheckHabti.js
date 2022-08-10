@@ -13,7 +13,7 @@ export default function CheckHabti({value, today, setToday}){
     useEffect(()=>{
         setstate(value);
         },[])
-       
+
     function togle(){
         if(!state.done){
             setUser({...user, percent: (user.percent + 1/user.total) });
@@ -34,7 +34,6 @@ export default function CheckHabti({value, today, setToday}){
     }
 
     function err(value){
-        console.log(value);
         return alert(value);
 
     }

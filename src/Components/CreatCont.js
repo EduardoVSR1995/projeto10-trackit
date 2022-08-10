@@ -27,7 +27,6 @@ export default function CreatCont(){
         return alert(value), setLo(!lo);
     }
     function sucess(){
-        console.log("ola")
         return navigate("/", alert("Parabéns, cadastro concluído") );
     }
 

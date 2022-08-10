@@ -25,11 +25,9 @@ export default function Enter(){
     function sucess(value){
         const obj= value.data;
         setUser(obj)
-        console.log(user)
         return  navigat("/habitos");
     }
     function err(value){
-        console.log(value)
         return alert(value),setLo(!lo);
     }
     return(

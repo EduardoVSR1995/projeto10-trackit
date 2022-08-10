@@ -14,14 +14,14 @@ export default function Everyhabt({obj}){
         const promis = delHabts(obj.id , {headers: {Authorization: `Bearer ${user.token}`}} )
         promis.then(sucess);
         promis.catch(err);
-    }
+        }
     }
     function sucess(){
         setUser({...user, reload:true })
         user.reload2();        
     }
     function err(value){
-        console.log(value)
+        alert(value)
 
     }
 

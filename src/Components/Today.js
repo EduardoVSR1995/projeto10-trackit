@@ -25,7 +25,6 @@ export default function Today() {
     function err(value) {
         return alert(value);
     }
-    console.log(user.percent === undefined, 0.08 > user.percent)
     return (
         <AllContainer>
             <Topo logo={logo} image={user.image}> </Topo>
