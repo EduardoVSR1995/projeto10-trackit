@@ -64,7 +64,7 @@ export default function Habits() {
 
 const AllHabits = styled.div`
     overflow: auto;
-    max-height: 150vw;
+    height: 80vh;
 `;
 
 

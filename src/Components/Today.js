@@ -41,9 +41,7 @@ export default function Today() {
 const AllHabtis = styled.div`
     margin-top: 28px;
     overflow: auto;
-    max-height: 150vw;
-
-    
+    height: 80vh;
 `;
 
 const AllContainer = styled.div`

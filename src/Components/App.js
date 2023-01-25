@@ -17,7 +17,6 @@ export default function App() {
         <>
             <UserContext.Provider value={{ user, setUser }}>
                 <ResetStyled />
-                <Wrapper>
                     <BrowserRouter>
                         <Routes>
                             <Route path="/" element={<Enter />} />
@@ -25,15 +24,9 @@ export default function App() {
                             <Route path='/habitos' element={<Habits />} />
                             <Route path='/hoje' element={<Today />} />
                             <Route path='/historico' element={<Histori />} />
-
                         </Routes>
                     </BrowserRouter>
-                </Wrapper>
             </UserContext.Provider>
         </>
     );
 }
-const Wrapper = styled.div`
- height: 230vw;
- max-width: 400px ;
-`;

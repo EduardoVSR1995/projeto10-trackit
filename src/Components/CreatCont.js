@@ -31,45 +31,43 @@ export default function CreatCont(){
     }
 
     return(
+        <>
         <Container>
             <img src={logo}/> 
+        </Container>
+        <Container>
             <form onSubmit={submitobj}>   
                 <Input type={"email"} background={lo} placeholder={"email"} onChange={e => setPersonalDate({...personalDate, email: e.target.value})}  required readOnly={lo}/> 
                 <Input type={"password"} background={lo} placeholder={"senha"} onChange={e => setPersonalDate({...personalDate, password: e.target.value})}  required  readOnly={lo}/>
                 <Input type={"text"} background={lo} placeholder={"nome"} onChange={e => setPersonalDate({...personalDate, name: e.target.value})} required readOnly={lo}  />
                 <Input type={"url"} background={lo} placeholder={"foto"} accept={"url"} onChange={e => setPersonalDate({...personalDate, image: e.target.value})} required  readOnly={lo}/>        
                 <Button type={"submit"} width={"100%"} bolean={lo} heigt={"45px"} onClick={()=>{!lo ? setLo(!lo): setLo(lo)}} scrib={"Entrar"}> </Button>
+                <Link to={"/"}> Já tem uma conta? Faça login!</Link>
             </form>
-         <Link to={"/"}> Já tem uma conta? Faça login!</Link>
-    </Container> 
-)
-
+        </Container>
+        </>
+    )
 }
+
 const Container = styled.div`
-    margin-top: 68px ;
-    width: 100%;
-    display: flex;
+    margin: 10% 0px 5% 10%  ;
+    width: 80%;
+    display: flex ;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     
-    a{
+    form{
+        margin-top: 33px;
+        width: 100%;
+        text-align: center ;
+        a{
         margin-top: 25px;
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 17px;
         color: #52B6FF;
-
-    }
-
-    form{
-        margin-top: 33px;
-        width: 80%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    
+      }
     }
     `;
+

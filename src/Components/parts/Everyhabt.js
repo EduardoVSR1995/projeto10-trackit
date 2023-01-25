@@ -34,9 +34,8 @@ export default function Everyhabt({obj}){
 }
 const Img = styled.img`
     position: relative;
-    bottom: 20px;
-    left: 300px;
-    z-index: 0;
+    left: 99% ;
+    bottom: 20% ;
 `;
 
 const Days = styled.div`

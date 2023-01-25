@@ -196,7 +196,7 @@ function Calenda(props){
 const Calend = styled.div`
 border-radius: 20px;
 width:335px;
-height:402px;
+height:452px;
 margin-top: 30px;
 .react-calendar {
   border-radius: 10px;
